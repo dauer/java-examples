@@ -1,0 +1,44 @@
+package reflection;
+
+import java.lang.reflect.*;
+import java.util.*;
+import java.util.stream.*;
+
+/**
+ * This example requires Java 20
+ * The accessFlags() method is available from 20+
+ * https://www.javaspecialists.eu/archive/Issue307-AccessFlag-Set-for-Modifiers.html
+ */
+public class AccessFlagsFormatter {
+
+    public static void main(String... args) {
+
+        Arrays.stream(ReflectionExample.class.getDeclaredMethods())
+                .sorted(Comparator.comparing(Method::getName))
+                .forEach(method -> System.out.println("""
+                        %s:
+                            Method: %s
+                            Modifiers: %s
+                            Modifiers Hex: %s
+                            AccessFlags: %s
+                        """.formatted(method.getName(),
+                        method,
+                        Modifier.toString(method.getModifiers()),
+                        hexValues(method.getModifiers()),
+                        method.accessFlags())));
+    }
+
+    private static String hexValues(int modifiers) {
+        int bit = 1;
+        List<Integer> values = new ArrayList<>();
+        while (modifiers != 0) {
+            if ((modifiers & bit) != 0) values.add(bit);
+            modifiers = modifiers & ~bit;
+            bit <<= 1;
+        }
+        return values.stream()
+                .map(val -> String.format("0x%04x", val))
+                .collect(Collectors.joining(" ", "[", "]"));
+    }
+
+}
