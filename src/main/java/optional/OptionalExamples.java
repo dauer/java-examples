@@ -28,6 +28,15 @@ public class OptionalExamples {
             })
         );
         System.out.println(optionalWithValue.orElseGet(OptionalExamples::foo));
+
+        // ofNullable()
+        // Returns Optional.of(param) or Optional.empty()
+        String param = null;
+        Optional<String> val = Optional.ofNullable(param);
+        System.out.println("Value: " + val);
+        val.ifPresent(System.out::println);
+        val = Optional.of("Horse");
+        val.ifPresent(System.out::println);
     }
 
     private static String foo() {

@@ -2,6 +2,8 @@
 
 Experimenting with various standard Java code examples...
 
+Currently up to and including Java 21.
+
 ## Topics
 
 * Concurrent
