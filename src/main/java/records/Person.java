@@ -19,8 +19,10 @@ public record Person(String name, String address, String email) {
     static Pattern emailRegex() {
         return EMAIL_REGEX_PATTERN;
     }
+
     /*
      * Compact Constructors is an (optional) way of adding validation rules
+     * - infers the variables from the record definition
     */
     public Person {
         if(!email.contains("@")) {
@@ -33,6 +35,11 @@ public record Person(String name, String address, String email) {
      */
     public Person(String name) {
         this(name, "Unknown", "example@example.com");
+    }
+
+    @Override
+    public String address() {
+        return address.toUpperCase();
     }
 
 }

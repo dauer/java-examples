@@ -17,6 +17,16 @@ public class RecordsExample {
 
         Person anotherPerson = new Person("John Doe");
         System.out.println(anotherPerson);
+
+        recordPatterns(aRecord);
+    }
+
+    private static void recordPatterns(Object o) {
+        // Record patterns Java 21
+        if (o instanceof Person(String n, String a, String e)) {
+            // Access 'aRecord.name()' as just 'a'
+            System.out.println("Name: " + n + ", Address: " + a + ", email: " + e);
+        }
     }
 
 }
