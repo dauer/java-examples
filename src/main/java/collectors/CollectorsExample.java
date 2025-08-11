@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.*;
 public class CollectorsExample {
 
     public static void main(String[] args) {
-        List<String> list = new ArrayList<String>(Arrays.asList("a", "bb","ccc", "dddd", "xxxxxxx", "eeeee", "aa", "bbb", "cccc"));
+        List<String> list = new ArrayList<>(Arrays.asList("a", "bb","ccc", "dddd", "xxxxxxx", "eeeee", "aa", "bbb", "cccc"));
         list.add("hhhh");
 
         Optional<String> result  = list.stream().max(Comparator.naturalOrder());

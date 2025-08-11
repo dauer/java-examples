@@ -2,7 +2,7 @@
 
 Experimenting with various standard Java code examples...
 
-Currently up to and including Java 21.
+Currently, up to and including Java 22.
 
 ## Topics
 
@@ -16,7 +16,7 @@ Currently up to and including Java 21.
 * [Records](./src/main/java/records/RecordsExample.java)
 * [Stream](./src/main/java/streams/StreamExamples.java)
 * [Reflection](./src/main/java/reflection/ReflectionExample.java)
-* [patern matching](./src/main/java/patternmatching/PatternMatchingExample.java)
+* [pattern matching](./src/main/java/patternmatching/PatternMatchingExample.java)
 * [Switch expression](./src/main/java/switchexpr/SwitchExpressionExample.java)
   * [Pattern matching](./src/main/java/switchexpr/patternmatching/PatternMatchingSwitchExample.java)
 * [Sealed interfaces](./src/main/java/sealed/SealedClassesExample.java)
