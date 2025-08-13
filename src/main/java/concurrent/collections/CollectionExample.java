@@ -1,0 +1,21 @@
+package concurrent.collections;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class CollectionExample {
+
+    public static void main(String[] args) {
+        // Map<String, String> capitalCities = new HashMap<>();
+        Map<String, String> capitalCities = new ConcurrentHashMap<>();
+        capitalCities.put("Oslo", "Norway");
+        capitalCities.put("Copenhagen", "Denmark");
+
+        for (String key : capitalCities.keySet()) {
+            System.out.println(key + " is the capital of " + capitalCities.get(key));
+            capitalCities.remove(key); // regular HashMap would throw a ConcurrentModificationException
+        }
+    }
+
+}

@@ -6,7 +6,7 @@ public class CallableTask implements Callable<String> {
 
     @Override
     public String call() {
-        return "Hello Kitty";
+        return "Hello from: " + this.getClass().getName() + " -> " + Thread.currentThread().getName();
     }
 
 }

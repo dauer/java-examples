@@ -11,6 +11,7 @@ public class ThreadExample {
         t2.setName("MyThread-2");
         t1.start();
         t2.start();
+        System.out.println("Current thread running is: " + Thread.currentThread().getName());
         System.out.println("Threads have been started!...");
     }
 

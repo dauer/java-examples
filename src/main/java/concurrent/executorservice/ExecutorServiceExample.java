@@ -1,47 +1,29 @@
 package concurrent.executorservice;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
+import java.util.concurrent.*;
 
-/**
- * TODO - synes det er svært at se hvad der sker? Der er ikke output eller anden indikation af at der sker noget...
- */
 public class ExecutorServiceExample {
 
-    private Task runnableTask;
-    private CallableTask callableTask;
-
     public static void main(String[] args) {
-        ExecutorServiceExample service = new ExecutorServiceExample();
-        service.execute();
-        service.executeWithMultiThread();
-    }
 
-    private Function<ScheduledExecutorService, Void> getTasksToRun() {
+        try(ExecutorService es = Executors.newSingleThreadExecutor()) {
+            // Lambda
+            es.execute(() -> System.out.println("Hello from: " + Thread.currentThread().getName()));
 
-        runnableTask = new Task();
-        callableTask = new CallableTask();
+            // Runnable
+            es.execute(new RunnableTask());
 
-        return (executorService -> {
-            Future<String> resultFuture = executorService.schedule(callableTask, 1, TimeUnit.SECONDS);
-            executorService.scheduleAtFixedRate( runnableTask, 100, 450, TimeUnit.SECONDS);
-            executorService.scheduleWithFixedDelay( runnableTask, 100, 150, TimeUnit.SECONDS);
-            return null;
-        });
-    }
-    private void execute() {
-        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-        getTasksToRun().apply(executorService);
-        executorService.shutdown();
-    }
+            // Callable
+            Future<String> res = es.submit(new CallableTask());
+            try {
+                System.out.println("The answer is: " + res.get(500, TimeUnit.MILLISECONDS));
+            } catch(InterruptedException | ExecutionException | TimeoutException e) {
+                System.out.println(e.getMessage());
+            }
 
-    private void executeWithMultiThread() {
-        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(2);
-        getTasksToRun().apply(executorService);
-        executorService.shutdown();
+            // shutdown no longer needed because of try-with-resources
+            // ex.shutdown();
+        }
     }
 
 }

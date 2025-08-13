@@ -11,8 +11,8 @@ public class NewThread extends Thread {
             try {
                 // Wait for one sec so it doesn't print too fast
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (InterruptedException _) {
+                System.out.println("Interrupted while waiting for thread to start");
             }
 
         }
