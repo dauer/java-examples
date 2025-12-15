@@ -1,9 +1,7 @@
 package streams;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -47,6 +45,15 @@ public class StreamExamples {
                 Collectors.groupingBy(String::length)
         );
         System.out.println(mapped);
+
+        // partitioningBy
+        List<Integer> intList = List.of(1, 2, 3, 4, 7, 8, 9, 11, 12, 13, 17, 19);
+        Predicate<Integer> oddOrEven = i -> i % 2 == 0;
+        Map<Boolean, List<Integer>> groups = intList.stream().collect(Collectors.partitioningBy(oddOrEven));
+        List<List<Integer>> subSets = new ArrayList<List<Integer>>(groups.values());
+        System.out.println("Always 2: " + groups.size());
+        System.out.println("Odd numbers = " + subSets.get(0));
+        System.out.println("Even numbers = " + subSets.get(1));
     }
 
 }
